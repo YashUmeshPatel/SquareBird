@@ -1,0 +1,34 @@
+{
+    "name": "GameControls",
+    "maps": [
+        {
+            "name": "Bird",
+            "id": "b41cfe79-47b2-41c4-b486-dc6ce05b465f",
+            "actions": [
+                {
+                    "name": "ScreenTap",
+                    "type": "Value",
+                    "id": "5ffcbab9-50f4-4423-b848-43915979275f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8caa618e-e835-4988-a082-9f420d8aea25",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScreenTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
