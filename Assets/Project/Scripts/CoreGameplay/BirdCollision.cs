@@ -8,14 +8,20 @@ namespace Yudiz.SquareBird.CoreGamePlay
         #region PUBLIC_VARS
         #endregion
 
-        #region PRIVATE_VARS
-        private const string Stage = "Stage";
+        #region PRIVATE_VARS        
+        private Bird bird;
         #endregion
 
         #region UNITY_CALLBACKS
+        private void Start()
+        {
+            bird = transform.GetComponentInParent<Bird>();
+            Debug.Log("Bird: " + bird.gameObject.name);
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag(Stage))
+            if (collision.gameObject.CompareTag(Constants.Stage))
             {
                 GameOver();
             }            
@@ -35,6 +41,8 @@ namespace Yudiz.SquareBird.CoreGamePlay
             //transform.parent.gameObject.SetActive(false);
 
             GameEvents.OnGameOver?.Invoke();
+
+            bird.GameOverBehaviour();
         }
         #endregion
 

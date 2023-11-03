@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Yudiz.SquareBird.Utility;
 
 namespace Yudiz.SquareBird.CoreGamePlay
 {
@@ -8,58 +9,74 @@ namespace Yudiz.SquareBird.CoreGamePlay
         #region PUBLIC_VARS
         #endregion
 
-        #region PRIVATE_VARS
-        private bool isGameOver;
-        private float moveValue = -68;
-        [SerializeField] private float desiredDuration;
+        #region PRIVATE_VARS                
+        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float endZoneSpeed = 3f;
+        [SerializeField] private float movementStopCooldown = 4f;
         #endregion
 
         #region UNITY_CALLBACKS
+        private void OnEnable()
+        {
+            GameEvents.OnGameOver += StopMoving;
+            GameEvents.OnEndZoneReached += StopMoving;
+            GameEvents.OnEndZoneReached += SlowDownSpeed;
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnGameOver -= StopMoving;
+            GameEvents.OnEndZoneReached -= StopMoving;
+            GameEvents.OnEndZoneReached -= SlowDownSpeed;
+        }
+
         private void Start()
         {
-            StartCoroutine(nameof(MoveStageCorutine));
+            StartMoving();
+            //StartCoroutine(nameof(MoveStageCorutine));
         }
         #endregion
 
         #region STATIC_FUNCTIONS
         #endregion
 
-        #region PUBLIC_FUNCTIONS
+        #region PUBLIC_FUNCTIONS        
+        public void StartMoving()
+        {
+            StartCoroutine(nameof(MoveStageCoroutine), moveSpeed);
+        }
+
+        [EasyButtons.Button]
+        public void StopMoving()
+        {
+            StopCoroutine(nameof(MoveStageCoroutine));
+        }
+
+        public void SlowDownSpeed()
+        {
+            StartCoroutine(nameof(MoveStageCoroutine), endZoneSpeed);
+            StartCoroutine(nameof(StopMovingAfterCoolDown));
+        }
         #endregion
 
-        #region PRIVATE_FUNCTIONS
-        private IEnumerator MoveStageCorutine()
+        #region PRIVATE_FUNCTIONS        
+        #endregion
+
+        #region CO-ROUTINES        
+        private IEnumerator MoveStageCoroutine(float moveSpeed)
         {
-            float initialXPosition = transform.position.x;
-            float elapsedTime = 0.0f;
-
-            while (!isGameOver) //When isGameOver is true Move Stage will Stop
+            while (true)
             {
-                elapsedTime += Time.deltaTime;
-                float t = elapsedTime / desiredDuration; 
-
-               
-                float newXValue = Mathf.Lerp(initialXPosition, moveValue, t);
-
-                transform.position = new Vector3(newXValue, transform.position.y, transform.position.z);
-
-                
-                if (t >= 1.0f)
-                {
-                    break; 
-                }
-
-                //if(t == 1)
-                //{
-                //    isGameOver = true;
-                //}
-
+                transform.Translate(moveSpeed * Time.deltaTime * Vector3.left);
                 yield return null;
             }
-        }        
-        #endregion
+        }
 
-        #region CO-ROUTINES
+        private IEnumerator StopMovingAfterCoolDown()
+        {
+            yield return new WaitForSeconds(movementStopCooldown);
+            StopMoving();
+        }
         #endregion
 
         #region EVENT_HANDLERS

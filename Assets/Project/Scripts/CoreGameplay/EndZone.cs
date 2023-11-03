@@ -1,4 +1,5 @@
 using UnityEngine;
+using Yudiz.SquareBird.Utility;
 
 namespace Yudiz.SquareBird.CoreGamePlay
 {
@@ -8,16 +9,25 @@ namespace Yudiz.SquareBird.CoreGamePlay
         #endregion
 
         #region PRIVATE_VARS
-        private const string Square = "Square";
+        
         #endregion
 
         #region UNITY_CALLBACKS        
         private void OnCollisionEnter2D(Collision2D collision)
-        {
-            Debug.Log("Collision: " + collision.gameObject.name);
-            if (collision.gameObject.CompareTag(Square))
+        {            
+            if (collision.gameObject.CompareTag(Constants.Square))
             {
                 collision.gameObject.SetActive(false);
+                GameOver();
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {            
+            if(collision.GetComponent<Bird>() != null)
+            {
+                Debug.Log("Bird Reached EndZone");                
+                GameEvents.OnEndZoneReached?.Invoke();
             }
         }
         #endregion
@@ -29,6 +39,10 @@ namespace Yudiz.SquareBird.CoreGamePlay
         #endregion
 
         #region PRIVATE_FUNCTIONS
+        private void GameOver()
+        {
+            GameEvents.OnDisableBirdControls?.Invoke();
+        }
         #endregion
 
         #region CO-ROUTINES

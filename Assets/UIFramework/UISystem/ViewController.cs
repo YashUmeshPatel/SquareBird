@@ -127,9 +127,12 @@ namespace ShonEagle.Tools.UI
             if (initScreen != ScreenName.None)
             {
                 ChangeView(initScreen);
+                
+                
             }
         }
-
+        //parent.rotation = new Quaternion(CubeList[count].transform.rotation.x, CubeList[count].transform.rotation.y, CubeList[count].transform.rotation.z * -1, CubeList[count].transform.rotation.w);
+        
         // public void ShowPopup(string title, string description)
         // {
         //     toast.Show(title, description);

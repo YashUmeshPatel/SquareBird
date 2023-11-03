@@ -17,7 +17,7 @@ namespace Yudiz.SquareBird.Manager
         private bool isInputPressed;
         private bool isCooldownFinished;
 
-        private float screentapWaitTime = 0.2f;
+        private float screenTapWaitTime = 0.2f;
         #endregion
 
         #region UNITY_CALLBACKS
@@ -29,6 +29,8 @@ namespace Yudiz.SquareBird.Manager
         private void OnEnable()
         {
             GameEvents.OnGameOver += DisableBirdControls;
+            GameEvents.OnEnableBirdControls += EnableBirdControls;
+            GameEvents.OnDisableBirdControls += DisableBirdControls;
 
             gameControls.Bird.Enable();            
             gameControls.Bird.ScreenTap.performed += ScreenTap;    
@@ -38,6 +40,8 @@ namespace Yudiz.SquareBird.Manager
         private void OnDisable()
         {
             GameEvents.OnGameOver -= DisableBirdControls;
+            GameEvents.OnEnableBirdControls -= EnableBirdControls;
+            GameEvents.OnDisableBirdControls -= DisableBirdControls;
 
             gameControls.Bird.Disable();            
             gameControls.Bird.ScreenTap.performed -= ScreenTap;
@@ -57,13 +61,19 @@ namespace Yudiz.SquareBird.Manager
         #endregion
 
         #region PUBLIC_FUNCTIONS
-        #endregion
-
-        #region PRIVATE_FUNCTIONS
-        private void DisableBirdControls()
+        public void DisableBirdControls()
         {
             gameControls.Bird.Disable();
         }
+
+        public void EnableBirdControls()
+        {
+            gameControls.Bird.Enable();
+        }
+        #endregion
+
+        #region PRIVATE_FUNCTIONS
+
 
         private void ScreenTap(InputAction.CallbackContext context)
         {
@@ -81,7 +91,7 @@ namespace Yudiz.SquareBird.Manager
         {
             isCooldownFinished = true;
             GameEvents.OnScreenTapped?.Invoke();
-            yield return new WaitForSeconds(screentapWaitTime);
+            yield return new WaitForSeconds(screenTapWaitTime);
             isCooldownFinished = false;
         }
         #endregion

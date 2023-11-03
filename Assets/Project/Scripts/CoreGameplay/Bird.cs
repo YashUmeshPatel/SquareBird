@@ -11,16 +11,14 @@ namespace Yudiz.SquareBird.CoreGamePlay
         #endregion
 
         #region PRIVATE_VARS
-        private const string Stage = "Stage";
+        private Rigidbody2D rb2D;
+        [SerializeField] private float forceAmount;
         #endregion
 
         #region UNITY_CALLBACKS
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void Awake()
         {
-            if (collision.gameObject.CompareTag(Stage))
-            {
-                Debug.Log("Game over");
-            }
+            rb2D = GetComponent<Rigidbody2D>();
         }
         #endregion
 
@@ -28,6 +26,12 @@ namespace Yudiz.SquareBird.CoreGamePlay
         #endregion
 
         #region PUBLIC_FUNCTIONS
+        public void GameOverBehaviour()
+        {
+            Debug.Log("Force");
+            rb2D.constraints = RigidbodyConstraints2D.None;
+            rb2D.AddForce(Vector2.left * forceAmount, ForceMode2D.Impulse);
+        }
         #endregion
 
         #region PRIVATE_FUNCTIONS        

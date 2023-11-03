@@ -1,17 +1,12 @@
-using System;
 using UnityEngine;
+using ShonEagle.Tools.UI;
+using Screen = ShonEagle.Tools.UI.Screen;
 
-namespace Yudiz.SquareBird.Utility
+namespace Yudiz.SquareBird.UI
 {
-    public static class GameEvents
+    public class MainMenuScreen : Screen
     {
         #region PUBLIC_VARS
-        public static Action OnScreenTapped;
-        public static Action OnGameOver;
-        public static Action OnEnableBirdControls;
-        public static Action OnDisableBirdControls;
-        public static Action OnEndZoneReached;
-
         #endregion
 
         #region PRIVATE_VARS

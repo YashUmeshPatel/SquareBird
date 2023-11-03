@@ -1,17 +1,10 @@
-using System;
 using UnityEngine;
 
-namespace Yudiz.SquareBird.Utility
+namespace Yudiz.SquareBird.CoreGamePlay
 {
-    public static class GameEvents
+    public class Levels : MonoBehaviour
     {
         #region PUBLIC_VARS
-        public static Action OnScreenTapped;
-        public static Action OnGameOver;
-        public static Action OnEnableBirdControls;
-        public static Action OnDisableBirdControls;
-        public static Action OnEndZoneReached;
-
         #endregion
 
         #region PRIVATE_VARS
