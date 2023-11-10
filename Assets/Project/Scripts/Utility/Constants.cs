@@ -7,6 +7,8 @@ namespace Yudiz.SquareBird.Utility
         #region PUBLIC_VARS
         public const string Square = "Square";
         public const string Stage = "Stage";
+        public const string Bird = "Bird";
+        
         #endregion
 
         #region PRIVATE_VARS

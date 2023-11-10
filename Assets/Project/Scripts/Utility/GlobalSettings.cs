@@ -1,10 +1,13 @@
 using UnityEngine;
 
-namespace Yudiz
+namespace Yudiz.SquareBird.Utility
 {
-    public class GlobalSettings : MonoBehaviour
+    [CreateAssetMenu]
+    public class GlobalSettings : ScriptableObject
     {
         #region PUBLIC_VARS
+        [Header("Score")]
+        public int squareScoreValue;
         #endregion
 
         #region PRIVATE_VARS

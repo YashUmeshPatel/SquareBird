@@ -5,9 +5,6 @@ namespace ShonEagle.Tools.UI
 {
     public class Screen : BaseUI
     {
-        public virtual void Back()
-        {
-
-        }
+        
     }
 }

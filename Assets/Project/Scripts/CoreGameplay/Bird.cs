@@ -31,7 +31,7 @@ namespace Yudiz.SquareBird.CoreGamePlay
             Debug.Log("Force");
             rb2D.constraints = RigidbodyConstraints2D.None;
             rb2D.AddForce(Vector2.left * forceAmount, ForceMode2D.Impulse);
-        }
+        }        
         #endregion
 
         #region PRIVATE_FUNCTIONS        

@@ -10,6 +10,7 @@ namespace Yudiz.SquareBird.CoreGamePlay
 
         #region PRIVATE_VARS
         [SerializeField] private Transform birdTransform;
+        [SerializeField] private float jumpAmount = 1.2f;
         #endregion
 
         #region UNITY_CALLBACKS
@@ -37,7 +38,7 @@ namespace Yudiz.SquareBird.CoreGamePlay
             if (squareClone == null) { return; }
             squareClone.SetActive(true);
             squareClone.transform.position = birdTransform.position;
-            birdTransform.position += Vector3.up * 1.5f;
+            birdTransform.position += Vector3.up * jumpAmount;
         }
         #endregion
 

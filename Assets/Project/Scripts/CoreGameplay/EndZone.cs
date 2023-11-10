@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Yudiz.SquareBird.Utility;
+using Yudiz.SquareBird.Manager;
 
 namespace Yudiz.SquareBird.CoreGamePlay
 {
@@ -9,25 +11,31 @@ namespace Yudiz.SquareBird.CoreGamePlay
         #endregion
 
         #region PRIVATE_VARS
-        
+        private int squareScore;
         #endregion
 
-        #region UNITY_CALLBACKS        
+        #region UNITY_CALLBACKS
+        private void Start()
+        {
+            squareScore = GameManager.Instance.GS.squareScoreValue;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
-        {            
+        {
             if (collision.gameObject.CompareTag(Constants.Square))
             {
                 collision.gameObject.SetActive(false);
-                GameOver();
+                ScoreManager.Instance.UpdateScore(squareScore);
             }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
-        {            
-            if(collision.GetComponent<Bird>() != null)
+        {
+            if (collision.GetComponent<Bird>() != null)
             {
-                Debug.Log("Bird Reached EndZone");                
+                Debug.Log("Bird Reached EndZone");
                 GameEvents.OnEndZoneReached?.Invoke();
+                DisableBirdControls();
             }
         }
         #endregion
@@ -39,7 +47,7 @@ namespace Yudiz.SquareBird.CoreGamePlay
         #endregion
 
         #region PRIVATE_FUNCTIONS
-        private void GameOver()
+        private void DisableBirdControls()
         {
             GameEvents.OnDisableBirdControls?.Invoke();
         }

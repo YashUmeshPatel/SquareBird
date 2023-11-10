@@ -9,5 +9,9 @@
     public enum ScreenName
     {
         None = 0,
+        MainMenu,
+        GamePlay,
+        LevelComplete,
+        GameOver
     }
 }

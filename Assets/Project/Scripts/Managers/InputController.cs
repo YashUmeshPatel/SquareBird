@@ -31,10 +31,11 @@ namespace Yudiz.SquareBird.Manager
             GameEvents.OnGameOver += DisableBirdControls;
             GameEvents.OnEnableBirdControls += EnableBirdControls;
             GameEvents.OnDisableBirdControls += DisableBirdControls;
+            
 
-            gameControls.Bird.Enable();            
+            //gameControls.Bird.Enable();            
             gameControls.Bird.ScreenTap.performed += ScreenTap;    
-            gameControls.Bird.ScreenTap.canceled += ScreenTap;    
+            gameControls.Bird.ScreenTap.canceled += ScreenTap;            
         }
 
         private void OnDisable()

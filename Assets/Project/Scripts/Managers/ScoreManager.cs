@@ -1,22 +1,30 @@
 using UnityEngine;
+using Yudiz.SquareBird.Utility;
+using ShonEagle.Tools.Utility;
 
-namespace Yudiz.SquareBird.CoreGamePlay
+namespace Yudiz.SquareBird.Manager
 {
-    public class Levels : MonoBehaviour
+    public class ScoreManager : Singleton<ScoreManager>
     {
         #region PUBLIC_VARS
         #endregion
 
         #region PRIVATE_VARS
+        private int score;
         #endregion
 
-        #region UNITY_CALLBACKS        
+        #region UNITY_CALLBACKS     
         #endregion
 
         #region STATIC_FUNCTIONS
         #endregion
 
         #region PUBLIC_FUNCTIONS
+        public void UpdateScore(int score)
+        {
+            this.score += score;
+            GameEvents.OnUpdateScore?.Invoke(this.score);
+        }
         #endregion
 
         #region PRIVATE_FUNCTIONS

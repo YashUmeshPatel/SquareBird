@@ -12,11 +12,11 @@ namespace Yudiz.SquareBird.Utility
         #region PRIVATE_VARS
         [SerializeField] private int numberOfEachObject;
         [SerializeField] private GameObject prefabToPool;
-        [SerializeField] private Transform generateSquareTransform;
-        public List<GameObject> ListOfPooledObjects;        
+        [SerializeField] private Transform parentTransform;
+        public List<GameObject> ListOfPooledObjects;
         #endregion
 
-        #region UNITY_CALLBACKS        
+        #region UNITY_CALLBACKS
         private void Start()
         {
             CreateObjects();
@@ -27,6 +27,25 @@ namespace Yudiz.SquareBird.Utility
         #endregion
 
         #region PUBLIC_FUNCTIONS
+        public GameObject PooledObject()
+        {
+            for (int i = 0; i < ListOfPooledObjects.Count; i++)
+            {
+                if (!ListOfPooledObjects[i].activeInHierarchy)
+                {
+                    return ListOfPooledObjects[i];
+                }
+            }
+            return null;
+        }
+
+        public void DisableAllSquares()
+        {
+            for (int i = 0; i < ListOfPooledObjects.Count; i++)
+            {
+                ListOfPooledObjects[i].SetActive(false);
+            }
+        }
         #endregion
 
         #region PRIVATE_FUNCTIONS
@@ -37,7 +56,7 @@ namespace Yudiz.SquareBird.Utility
 
             for (int i = 0; i < numberOfEachObject; i++)
             {
-                tmp = Instantiate(prefabToPool, generateSquareTransform);
+                tmp = Instantiate(prefabToPool, parentTransform);
                 tmp.SetActive(false);
                 ListOfPooledObjects.Add(tmp);
             }
@@ -52,22 +71,5 @@ namespace Yudiz.SquareBird.Utility
 
         #region UI_CALLBACKS
         #endregion
-
-
-
-
-
-
-        public GameObject PooledObject()
-        {
-            for (int i = 0; i < ListOfPooledObjects.Count; i++)
-            {
-                if (!ListOfPooledObjects[i].activeInHierarchy)
-                {
-                    return ListOfPooledObjects[i];
-                }
-            }
-            return null;
-        }
     }
 }

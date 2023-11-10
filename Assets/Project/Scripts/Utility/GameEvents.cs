@@ -7,11 +7,17 @@ namespace Yudiz.SquareBird.Utility
     {
         #region PUBLIC_VARS
         public static Action OnScreenTapped;
+        public static Action OnGameStart;
         public static Action OnGameOver;
         public static Action OnEnableBirdControls;
         public static Action OnDisableBirdControls;
         public static Action OnEndZoneReached;
+        public static Action OnLevelComplete;
+        public static Action<int> OnUpdateScore;
+        public static Action<float, float, float> OnLevelProgress;        
 
+        //public delegate float GameDelegate(float startPoint, float endPoint, Transform LevelTransform);
+        //public static GameDelegate OnLevelProgress;
         #endregion
 
         #region PRIVATE_VARS

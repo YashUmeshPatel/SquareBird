@@ -33,10 +33,10 @@ namespace ShonEagle.Tools.UI
         }//screws with the joysticks because apparently they scale (what?)// content.SetActive(false);
         public virtual void Enable()
         {
-        
-        canvas.enabled = true;//screws with the joysticks because apparently they scale (what?)// content.SetActive(true);
-        isActive=true;
-        } 
+
+            canvas.enabled = true;//screws with the joysticks because apparently they scale (what?)// content.SetActive(true);
+            isActive = true;
+        }
 
 
         public virtual void Show()
@@ -61,7 +61,7 @@ namespace ShonEagle.Tools.UI
         }
         public virtual void Hide()
         {
-            if(!isActive)
+            if (!isActive)
                 return;
             canvasGroup.interactable = false;
             if (uiAnimator)
